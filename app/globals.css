@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #ededed;
+  background: #0a0a0a;
+  font-family: var(--font-dm-sans), sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Neon glow animation */
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 135, 0.5),
+                 0 0 20px rgba(0, 255, 135, 0.3),
+                 0 0 40px rgba(0, 255, 135, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 135, 0.8),
+                 0 0 40px rgba(0, 255, 135, 0.5),
+                 0 0 80px rgba(0, 255, 135, 0.3);
+  }
+}
+
+.neon-glow {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* Pulsing dot */
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.dot-pulse::after {
+  content: "●";
+  animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions for page state changes */
+.state-transition {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Score change animation */
+@keyframes scoreChange {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.score-change {
+  animation: scoreChange 0.5s ease-out;
+}
